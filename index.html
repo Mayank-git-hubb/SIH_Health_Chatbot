@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jan — AI Medical Consultation</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#218083">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏥%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    
+    <div id="languageStep" class="consultation-step active">
+        <div class="step-container">
+            <div class="step-header">
+                <h1 class="step-title">🌍 Select Your Language / भाषा चुनें</h1>
+                <p class="step-subtitle">Choose your preferred language for the medical consultation</p>
+            </div>
+            <div class="language-grid">
+                <button class="language-btn" data-lang="en">
+                    <!--span class="lang-flag">🇺🇸</span-->
+                    <span class="lang-name">English</span>
+                    <span class="lang-desc">Complete consultation in English</span>
+                </button>
+                <button class="language-btn" data-lang="hi">
+                    <!--span class="lang-flag">🇮🇳</span-->
+                    <span class="lang-name">हिंदी</span>
+                    <span class="lang-desc">हिंदी में पूर्ण परामर्श</span>
+                </button>
+                <!-- Other languages launcher (focuses the dropdown) 
+                <button id="otherLanguageBtn" class="language-other-btn" type="button" aria-haspopup="listbox" aria-controls="languageSelect">
+                    <span class="lang-name">Other languages</span>
+                    <span class="lang-desc coming-soon-text">More languages — Coming Soon</span>
+                </button-->
+            </div>
+
+            <div style="margin-top:16px;">
+                <label for="languageSelect" style="display:block; margin-bottom:6px; font-weight:600;">Choose language (or pick Other):</label>
+                <select id="languageSelect" class="form-control">
+                    <option value="">-- Select other language --</option>
+                    <option value="or">ଓଡ଼ିଆ (Odia)</option>
+                    <option value="bn">বাংলা (Bengali)</option>
+                    <option value="ta">தமிழ் (Tamil)</option>
+                    <option value="te">తెలుగు (Telugu)</option>
+                    <option value="mr">मराठी (Marathi)</option>
+                    <option value="gu">ગુજરાતી (Gujarati)</option>
+                    <option value="pa">ਪੰਜਾਬी (Punjabi)</option>
+                    <option value="kn">ಕನ್ನಡ (Kannada)</option>
+                    <option value="ml">മലയാളം (Malayalam)</option>
+                    <option value="other">Other languages (Coming Soon)</option>
+                </select>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="welcomeStep" class="consultation-step">
+        <div class="step-container">
+            <div class="welcome-content">
+                <div class="welcome-icon">🏥</div>
+                <h1 class="welcome-title" data-i18n="welcome_title">Jan Mitra — Your Health Companion</h1>
+                <div class="welcome-message" data-i18n="welcome_message">
+                    Hi — I'm Jan Mitra. Tell me your symptoms and a bit about your health, and I’ll give simple, practical advice and next steps tailored to you.
+                </div>
+                <div class="consultation-steps">
+                    <h3 data-i18n="consultation_process">Our Intelligent Analysis Process:</h3>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <span class="step-number">1</span>
+                            <span data-i18n="step_age">Age-Specific Risk Analysis</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">2</span>
+                            <span data-i18n="step_history">Medical History Intelligence</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">3</span>
+                            <span data-i18n="step_symptoms">Symptom Pattern Recognition</span>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">4</span>
+                            <span data-i18n="step_analysis">Personalized Medical Intelligence</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn--primary btn--lg" id="startConsultationBtn" data-i18n="start_consultation">
+                    Start Intelligent Health Analysis
+                </button>
+                <div style="margin-top:12px;">
+                    <button class="btn btn--outline" id="backFromWelcome">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="ageStep" class="consultation-step">
+        <div class="step-container">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 25%"></div>
+            </div>
+            <div class="step-header">
+                <h2 class="step-title" data-i18n="age_title">👤 Age-Specific Risk Profile</h2>
+                <p class="step-subtitle" data-i18n="age_subtitle">Age determines disease risk patterns - essential for accurate diagnosis</p>
+                <div class="assistant-credit" style="margin-top:8px; font-size:0.95rem; color:var(--color-muted);">Provided by <strong>Jan Mitra</strong></div>
+            </div>
+            <div class="form-section">
+                <div class="patient-name-group" style="margin-bottom:12px;">
+                    <label class="form-label">Patient Name:</label>
+                    <input type="text" id="patientName" class="form-control" placeholder="Enter patient name">
+                </div>
+                <div class="age-input-group">
+                    <label class="form-label" data-i18n="your_age">Your Age:</label>
+                    <div class="age-options">
+                        <div class="age-input-method">
+                            <input type="number" id="ageInput" class="form-control age-number-input" 
+                                   placeholder="Enter your age" min="1" max="120" data-i18n-placeholder="enter_age">
+                        </div>
+                        <div class="age-range-options">
+                            <button class="age-range-btn" data-age="child">0-12 <span data-i18n="years">years</span></button>
+                            <button class="age-range-btn" data-age="teen">13-19 <span data-i18n="years">years</span></button>
+                            <button class="age-range-btn" data-age="adult">20-59 <span data-i18n="years">years</span></button>
+                            <button class="age-range-btn" data-age="senior">60+ <span data-i18n="years">years</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn--primary" id="continueFromAge" data-i18n="continue">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="doctorReportStep" class="consultation-step">
+        <div class="step-container">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 33%"></div>
+            </div>
+            <div class="step-header">
+                <h2 class="step-title">📄 Doctor Report Analysis & Voice Input</h2>
+                <p class="step-subtitle">Upload clinical reports (plain text) and/or dictate complaints. We'll parse key findings and pre-fill your consultation.</p>
+            </div>
+
+            <div class="form-section">
+                <div class="features-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                    <div class="feature-card coming-soon-card card" aria-hidden="true">
+                        <div class="card__header"><h4>📑 Doctor Report Analysis</h4></div>
+                        <div class="card__body">
+                            <p class="muted">Upload and parsing of clinical reports is coming soon. We'll extract diagnoses, medications, and key findings automatically.</p>
+                            <div style="margin-top:12px; display:flex; gap:8px;">
+                                <button class="btn btn--primary" disabled>Upload Report</button>
+                                <button class="btn btn--outline" disabled>Paste Report</button>
+                            </div>
+                        </div>
+                        <div class="coming-badge">Coming Soon</div>
+                    </div>
+
+                    <div class="feature-card coming-soon-card card" aria-hidden="true">
+                        <div class="card__header"><h4>🎙️ Voice Input</h4></div>
+                        <div class="card__body">
+                            <p class="muted">Voice capture and automatic transcription will soon let you dictate your complaint directly into the consultation.</p>
+                            <div style="margin-top:12px; display:flex; gap:8px;">
+                                <button class="btn btn--primary" disabled>Start Voice</button>
+                                <button class="btn btn--secondary" disabled>Stop</button>
+                            </div>
+                        </div>
+                        <div class="coming-badge">Coming Soon</div>
+                    </div>
+                </div>
+
+                <div class="step-actions" style="margin-top:16px; display:flex; gap:8px;">
+                    <button class="btn btn--outline" id="backFromDoctorReport">Back</button>
+                    <button class="btn btn--primary" id="continueFromDoctorReport">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="historyStep" class="consultation-step">
+        <div class="step-container">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 50%"></div>
+            </div>
+            <div class="step-header">
+                <h2 class="step-title" data-i18n="history_title">📋 Chronic Disease Intelligence</h2>
+                <p class="step-subtitle" data-i18n="history_subtitle">Medical history affects symptom interpretation and test recommendations</p>
+            </div>
+            <div class="form-section">
+                <div class="medical-conditions">
+                    <h3 data-i18n="existing_conditions">Existing Medical Conditions:</h3>
+                    <div class="conditions-grid" id="conditionsGrid">
+                        <!-- Conditions will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="medications-section">
+                    <h3 data-i18n="current_medications">Current Medications:</h3>
+                    <textarea id="medicationsInput" class="form-control" rows="3" 
+                             placeholder="List any medications you're currently taking..." 
+                             data-i18n-placeholder="medications_placeholder"></textarea>
+                </div>
+                <div class="family-history-section">
+                    <h3 data-i18n="family_history">Family History (Genetic Risk Factors):</h3>
+                    <textarea id="familyHistoryInput" class="form-control" rows="2" 
+                             placeholder="Family history of heart disease, diabetes, cancer..." 
+                             data-i18n-placeholder="family_history_placeholder"></textarea>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn--outline" id="backFromHistory" data-i18n="back">Back</button>
+                    <button class="btn btn--primary" id="continueFromHistory" data-i18n="continue">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div id="symptomsStep" class="consultation-step">
+        <div class="step-container">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 75%"></div>
+            </div>
+            <div class="step-header">
+                <h2 class="step-title" data-i18n="symptoms_title">🩺 Symptom Pattern Analysis</h2>
+                <p class="step-subtitle" data-i18n="symptoms_subtitle">Detailed symptom analysis for accurate medical intelligence</p>
+            </div>
+            <div class="form-section">
+                <div class="primary-complaint">
+                    <h3 data-i18n="primary_complaint">Describe your main symptom in detail:</h3>
+                    <textarea id="primaryComplaint" class="form-control" rows="4" 
+                             placeholder="Be specific: location, quality, timing, triggers, what makes it better/worse..." 
+                             data-i18n-placeholder="primary_complaint_placeholder"></textarea>
+                </div>
+                <div class="symptom-details">
+                    <div class="detail-group">
+                        <h4 data-i18n="symptom_duration">Duration (affects urgency assessment):</h4>
+                        <select id="symptomDuration" class="form-control">
+                            <option value="" data-i18n="select_duration">Select duration</option>
+                            <option value="hours" data-i18n="few_hours">A few hours</option>
+                            <option value="1-2days" data-i18n="1_2_days">1-2 days</option>
+                            <option value="3-7days" data-i18n="3_7_days">3-7 days</option>
+                            <option value="1-2weeks" data-i18n="1_2_weeks">1-2 weeks</option>
+                            <option value="2weeks+" data-i18n="more_2_weeks">More than 2 weeks</option>
+                            <option value="chronic" data-i18n="chronic">Chronic (ongoing)</option>
+                        </select>
+                    </div>
+                    <div class="detail-group">
+                        <h4 data-i18n="pain_severity">Severity Level (affects risk calculation):</h4>
+                        <div class="severity-slider">
+                            <input type="range" id="severitySlider" class="severity-range" min="1" max="10" value="5">
+                            <div class="severity-labels">
+                                <span data-i18n="mild">Mild (1-3)</span>
+                                <span data-i18n="moderate">Moderate (4-7)</span>
+                                <span data-i18n="severe">Severe (8-10)</span>
+                            </div>
+                            <div class="severity-value">Level: <span id="severityValue">5</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="associated-symptoms">
+                    <h3 data-i18n="associated_symptoms">Associated Symptoms (for pattern recognition):</h3>
+                    <div class="symptoms-checklist" id="symptomsChecklist">
+                        <!-- Symptoms will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="recent-changes">
+                    <h3 data-i18n="recent_changes">Recent Changes or Triggers:</h3>
+                    <textarea id="recentChanges" class="form-control" rows="3" 
+                             placeholder="New medications, stress, travel, diet changes, activities..." 
+                             data-i18n-placeholder="recent_changes_placeholder"></textarea>
+                </div>
+                <div class="step-actions">
+                    <button class="btn btn--outline" id="backFromSymptoms" data-i18n="back">Back</button>
+                    <button class="btn btn--primary" id="continueFromSymptoms" data-i18n="get_analysis">Get Intelligent Analysis</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="resultsStep" class="consultation-step">
+        <div class="step-container">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%"></div>
+            </div>
+            <div class="results-header">
+                <h2 class="step-title" data-i18n="analysis_title">🎯 Personalized Medical Intelligence Report</h2>
+                <div style="margin-top:8px; font-size:0.95rem; color:var(--color-muted);">Provided by <strong>Jan Mitra</strong></div>
+                <div class="consultation-summary" id="consultationSummary">
+                    <!-- Summary will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="analysis-sections">
+                <!-- Risk Assessment -->
+                <div class="analysis-section">
+                    <h3 class="section-title">⚠️ <span data-i18n="risk_assessment">Intelligent Risk Assessment</span></h3>
+                    <div id="riskAssessment" class="section-content">
+                        <!-- Risk assessment content -->
+                    </div>
+                </div>
+
+                <!-- Possible Conditions -->
+                <div class="analysis-section">
+                    <h3 class="section-title">🔍 <span data-i18n="possible_conditions">Personalized Condition Analysis</span></h3>
+                    <div id="possibleConditions" class="section-content">
+                        <!-- Possible conditions content -->
+                    </div>
+                </div>
+
+                <!-- Testing Recommendations -->
+                <div class="analysis-section">
+                    <h3 class="section-title">🧪 <span data-i18n="testing_recommendations">Targeted Test Recommendations</span></h3>
+                    <div id="testingRecommendations" class="section-content">
+                        <!-- Testing recommendations content -->
+                    </div>
+                </div>
+
+                <!-- Treatment Plan -->
+                <div class="analysis-section">
+                    <h3 class="section-title">💊 <span data-i18n="treatment_plan">Personalized Care Plan</span></h3>
+                    <div id="treatmentPlan" class="section-content">
+                        <!-- Treatment plan content -->
+                    </div>
+                </div>
+
+                <!-- Specialist Recommendations -->
+                <div class="analysis-section">
+                    <h3 class="section-title">👨‍⚕️ <span data-i18n="specialist_recommendations">Specialist Recommendations</span></h3>
+                    <div id="specialistRecommendations" class="section-content">
+                        <!-- Specialist recommendations content -->
+                    </div>
+                </div>
+
+                <!-- Follow-up Plan -->
+                <div class="analysis-section">
+                    <h3 class="section-title">📅 <span data-i18n="followup_plan">Follow-up Protocol</span></h3>
+                    <div id="followupPlan" class="section-content">
+                        <!-- Follow-up plan content -->
+                    </div>
+                </div>
+
+                <!-- Emergency Warning -->
+                <div class="analysis-section emergency-section" id="emergencyWarning" style="display: none;">
+                    <h3 class="section-title">🚨 <span data-i18n="emergency_warning">URGENT MEDICAL ATTENTION</span></h3>
+                    <div class="section-content">
+                        <!-- Emergency warning content -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn btn--outline" id="printResults" data-i18n="print_results">📄 Print Report</button>
+                <button class="btn btn--secondary" id="restartConsultation" data-i18n="new_consultation">🔄 New Consultation</button>
+                <button class="btn btn--primary" id="findNearbyHospitals" data-i18n="find_hospitals">🏥 Find Hospitals</button>
+                <button class="btn btn--outline" id="backFromResults">Back</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="loadingScreen" class="loading-screen hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3 class="loading-title" data-i18n="analyzing_data">Analyzing Your Medical Data...</h3>
+            <p class="loading-subtitle" data-i18n="please_wait">Advanced AI processing your unique profile</p>
+            <div class="loading-steps">
+                <div class="loading-step active" data-i18n="processing_symptoms">Correlating symptom patterns...</div>
+                <div class="loading-step" data-i18n="analyzing_conditions">Cross-referencing medical history...</div>
+                <div class="loading-step" data-i18n="generating_recommendations">Calculating personalized recommendations...</div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="emergencyModal" class="modal hidden">
+        <div class="modal-content emergency-modal">
+            <div class="modal-header emergency-header">
+                <h3>🚨 <span data-i18n="emergency_detected">CRITICAL SYMPTOMS DETECTED</span></h3>
+            </div>
+            <div class="modal-body">
+                <div class="emergency-message">
+                    <p data-i18n="emergency_message">Based on your symptom pattern and medical history, you may need immediate medical attention.</p>
+                    <div class="emergency-actions">
+                        <button class="btn btn--primary emergency-btn" onclick="window.open('tel:108')">
+                            📞 <span data-i18n="call_emergency">Call 108 (Emergency)</span>
+                        </button>
+                        <button class="btn btn--secondary" id="continueAnyway" data-i18n="continue_assessment">Continue Analysis</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
